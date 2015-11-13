@@ -1,3 +1,16 @@
+#include "PlainFIR.h"
+
+PlainFIR::PlainFIR(void) 
+{
+/* Constructor */
+}
+
+PlainFIR::~PlainFIR(void)
+{ 
+/* Destructor */
+}
+
+
 void PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2) 
 /* Order shall be an even number in order to simplify the code */
 {
