@@ -10,9 +10,9 @@ PlainFIR::~PlainFIR(void)
 /* Destructor */
 }
 
-uint8_t PlainFFT::Revision(void)
+uint8_t PlainFIR::Revision(void)
 { 
-	return(FFT_LIB_REV);
+	return(FIR_LIB_REV);
 }
 
 void PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2) 
