@@ -10,17 +10,14 @@ PlainFIR::~PlainFIR(void)
 /* Destructor */
 }
 
-uint8_t PlainFIR::Revision(void)
-{ 
-	return(FIR_LIB_REV);
-}
+
 
 void PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2) 
 /* Order shall be an even number in order to simplify the code */
 {
-	_order  = order;
+       uint16_t	_order  = order;
 	uint16_t taps = order + 1;
-	_vFilter = (double *)malloc(taps * sizeof(double)); /* allocate memory for n taps buffer */
+       uint16_t	_vFilter = (double *)malloc(taps * sizeof(double)); /* allocate memory for n taps buffer */
 	double normTransFreq1 = transition1 / samplingFrequency;
 	double normTransFreq2 = transition2 / samplingFrequency;
 	/* Compute half + 1 weighing factors, because the filter is symetric */
