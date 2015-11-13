@@ -23,19 +23,25 @@
 #include "application.h"
 #include <math.h>
 
-#define FFT_LIB_REV 0x02
+#define FIR_LIB_REV 0x02
 /* Custom constants */
-#define FFT_FORWARD 0x01
-#define FFT_REVERSE 0x00
+#define FIR_FORWARD 0x01
+#define FIR_REVERSE 0x00
 /* Windowing type */
-#define FFT_WIN_TYP_RECTANGLE 0x00 /* rectangle (Box car) */
-#define FFT_WIN_TYP_HAMMING 0x01 /* hamming */
-#define FFT_WIN_TYP_HANN 0x02 /* hann */
-#define FFT_WIN_TYP_TRIANGLE 0x03 /* triangle (Bartlett) */
-#define FFT_WIN_TYP_BLACKMAN 0x04 /* blackmann */
-#define FFT_WIN_TYP_FLT_TOP 0x05 /* flat top */
-#define FFT_WIN_TYP_WELCH 0x06 /* welch */
-	
+#define FIR_WIN_TYP_RECTANGLE 0x00 /* rectangle (Box car) */
+#define FIR_WIN_TYP_HAMMING 0x01 /* hamming */
+#define FIR_WIN_TYP_HANN 0x02 /* hann */
+#define FIR_WIN_TYP_TRIANGLE 0x03 /* triangle (Bartlett) */
+#define FIR_WIN_TYP_BLACKMAN 0x04 /* blackmann */
+#define FIR_WIN_TYP_FLT_TOP 0x05 /* flat top */
+#define FIR_WIN_TYP_WELCH 0x06 /* welch */
+/*bands of frequerncies*/
+#define FIR_FIL_TYP_LOW_PASS
+#define FIR_FIL_TYP_HIG_PASS
+#define FIR_FIL_TYP_BAN_PASS
+#define FIR_FIL_TYP_BAN_STOP
+
+
 class PlainFIR {
 	public:
 
