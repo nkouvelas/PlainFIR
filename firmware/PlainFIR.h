@@ -36,6 +36,9 @@
 #define FFT_WIN_TYP_FLT_TOP 0x05 /* flat top */
 #define FFT_WIN_TYP_WELCH 0x06 /* welch */
 	
-void PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2)
+class PlainFIR {
+	public:
+void PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2);
+};
 
 #endif
