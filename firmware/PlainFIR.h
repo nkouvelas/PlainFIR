@@ -38,7 +38,7 @@
 	
 class PlainFIR {
 	public:
-void PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2);
+void SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2);
 };
 
 #endif
