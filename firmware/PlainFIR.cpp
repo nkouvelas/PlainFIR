@@ -1,4 +1,4 @@
-void PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2) 
+void PlainFIR::SetFilter(int filterType, int order, int samplingFrequency, int windowType, int transition1, int transition2) 
 /* Order shall be an even number in order to simplify the code */
 {
 	_order  = order;
