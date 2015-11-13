@@ -40,9 +40,9 @@ class PlainFIR {
 	public:
 
 	/* Constructor */
-	PlainFFT(void);
+	PlainFIR(void);
 	/* Destructor */
-	~PlainFFT(void);
+	~PlainFIR(void);
 	/* Functions */
 void SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2);
 };
