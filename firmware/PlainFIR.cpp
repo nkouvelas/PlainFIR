@@ -17,7 +17,7 @@ void PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFr
 {
       uint16_t _order  = order;
 	uint16_t taps = order + 1;
-      (double *) _vFilter = (double *)malloc(taps * sizeof(double)); /* allocate memory for n taps buffer */
+      double * _vFilter = (double *)malloc(taps * sizeof(double)); /* allocate memory for n taps buffer */
 	double normTransFreq1 = transition1 / samplingFrequency;
 	double normTransFreq2 = transition2 / samplingFrequency;
 	/* Compute half + 1 weighing factors, because the filter is symetric */
