@@ -12,7 +12,7 @@ PlainFIR::~PlainFIR(void)
 
 
 
-void PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2) 
+double PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2) 
 /* Order shall be an even number in order to simplify the code */
 {
       uint16_t _order  = order;
@@ -81,4 +81,5 @@ void PlainFIR::SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFr
 		_vFilter[n] = weigthingFactor;
 		_vFilter[taps - (n +1)] = weigthingFactor;
 	}
+	return(_vFilter)//////////prosthiki
 };
