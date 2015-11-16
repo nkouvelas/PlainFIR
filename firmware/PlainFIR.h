@@ -48,7 +48,7 @@ class PlainFIR {
 	/* Destructor */
 	~PlainFIR(void);
 	/* Functions */
-void SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2);
-};
+double SetFilter(uint8_t filterType, uint16_t order, uint16_t samplingFrequency, uint8_t windowType, uint16_t transition1, uint16_t transition2);
+};////itan void
 
 #endif
