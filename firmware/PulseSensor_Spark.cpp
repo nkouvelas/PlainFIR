@@ -1,5 +1,5 @@
 #include "application.h"
-#include "PulseSensor_Spark.h"
+//#include "PulseSensor_Spark.h"
 
 void interruptSetup(void){
   // Allocate a timer to throw an interrupt every 2mS.
