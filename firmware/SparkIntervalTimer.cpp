@@ -1,19 +1,14 @@
 /* Copyright (c) 2014 Paul Kourany, based on work by Dianel Gilbert
-
 UPDATED Sept 3, 2015 - Added support for Particle Photon
-
 Copyright (c) 2013 Daniel Gilbert, loglow@gmail.com
-
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in the
 Software without restriction, including without limitation the rights to use, copy,
 modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the
 following conditions:
-
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
 PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
@@ -34,7 +29,33 @@ IntervalTimer::ISRcallback IntervalTimer::SIT_CALLBACK[];
 // Define interval timer ISR hooks for three available timers
 // TIM2...TIM7 with callbacks to user code.
 // ------------------------------------------------------------
+#if defined(STM32F10X_MD) || !defined(PLATFORM_ID)		//Core
+void Wiring_TIM2_Interrupt_Handler_override()
+{
+	if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+	{
+		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+		IntervalTimer::SIT_CALLBACK[0]();
+	}
+}
 
+void Wiring_TIM3_Interrupt_Handler_override()
+{
+	if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
+	{
+		TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+		IntervalTimer::SIT_CALLBACK[1]();
+	}
+}
+
+void Wiring_TIM4_Interrupt_Handler_override()
+{
+	if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
+	{
+		TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
+		IntervalTimer::SIT_CALLBACK[2]();
+	}
+}
 #elif defined(STM32F2XX) && defined(PLATFORM_ID)	//Photon
 void Wiring_TIM3_Interrupt_Handler_override()
 {
@@ -169,8 +190,23 @@ void IntervalTimer::start_SIT(intPeriod Period, bool scale) {
 
 	//use SIT_id to identify TIM#
 	switch (SIT_id) {
-
-#if defined(STM32F2XX) && defined(PLATFORM_ID)	//Photon
+#if defined(STM32F10X_MD) || !defined(PLATFORM_ID)		//Core
+	case 0:		// TIM2
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+		nvicStructure.NVIC_IRQChannel = TIM2_IRQn;
+		TIMx = TIM2;
+		break;
+	case 1:		// TIM3
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+		nvicStructure.NVIC_IRQChannel = TIM3_IRQn;
+		TIMx = TIM3;
+		break;
+	case 2:		// TIM4
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+		nvicStructure.NVIC_IRQChannel = TIM4_IRQn;
+		TIMx = TIM4;
+		break;
+#elif defined(STM32F2XX) && defined(PLATFORM_ID)	//Photon
 	case 0:		// TIM3
 		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 		nvicStructure.NVIC_IRQChannel = TIM3_IRQn;
@@ -256,7 +292,20 @@ void IntervalTimer::stop_SIT() {
 
 	//use SIT_id to identify TIM#
 	switch (SIT_id) {
-#if defined(STM32F2XX) && defined(PLATFORM_ID)	//Photon
+#if defined(STM32F10X_MD) || !defined(PLATFORM_ID)		//Core
+	case 0:		// TIM2
+		nvicStructure.NVIC_IRQChannel = TIM2_IRQn;
+		TIMx = TIM2;
+		break;
+	case 1:		// TIM3
+		nvicStructure.NVIC_IRQChannel = TIM3_IRQn;
+		TIMx = TIM3;
+		break;
+	case 2:		// TIM4
+		nvicStructure.NVIC_IRQChannel = TIM4_IRQn;
+		TIMx = TIM4;
+		break;
+#elif defined(STM32F2XX) && defined(PLATFORM_ID)	//Photon
 	case 0:		// TIM3
 		nvicStructure.NVIC_IRQChannel = TIM3_IRQn;
 		TIMx = TIM3;
@@ -305,7 +354,20 @@ void IntervalTimer::interrupt_SIT(action ACT)
 
 	//use SIT_id to identify TIM#
 	switch (SIT_id) {
-#if defined(STM32F2XX) && defined(PLATFORM_ID)	//Photon
+#if defined(STM32F10X_MD) || !defined(PLATFORM_ID)		//Core
+	case 0:		// TIM2
+		nvicStructure.NVIC_IRQChannel = TIM2_IRQn;
+		TIMx = TIM2;
+		break;
+	case 1:		// TIM3
+		nvicStructure.NVIC_IRQChannel = TIM3_IRQn;
+		TIMx = TIM3;
+		break;
+	case 2:		// TIM4
+		nvicStructure.NVIC_IRQChannel = TIM4_IRQn;
+		TIMx = TIM4;
+		break;
+#elif defined(STM32F2XX) && defined(PLATFORM_ID)	//Photon
 	case 0:		// TIM3
 		nvicStructure.NVIC_IRQChannel = TIM3_IRQn;
 		TIMx = TIM3;
@@ -361,7 +423,17 @@ void IntervalTimer::resetPeriod_SIT(intPeriod newPeriod, bool scale)
 
 	//use SIT_id to identify TIM#
 	switch (SIT_id) {
-#if defined(STM32F2XX) && defined(PLATFORM_ID)	//Photon
+#if defined(STM32F10X_MD) || !defined(PLATFORM_ID)		//Core
+	case 0:		// TIM2
+		TIMx = TIM2;
+		break;
+	case 1:		// TIM3
+		TIMx = TIM3;
+		break;
+	case 2:		// TIM4
+		TIMx = TIM4;
+		break;
+#elif defined(STM32F2XX) && defined(PLATFORM_ID)	//Photon
 	case 0:		// TIM3
 		TIMx = TIM3;
 		break;
