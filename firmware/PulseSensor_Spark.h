@@ -39,6 +39,3 @@ IntervalTimer pulseTimer;
 
 #endif
 
-
-
-
