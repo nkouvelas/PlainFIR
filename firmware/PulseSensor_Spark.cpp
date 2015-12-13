@@ -90,7 +90,3 @@ void pulseISR(void) {
     interrupts();
 }// end isr
 
-
-
-
-
