@@ -33,8 +33,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
   #error "*** PARTICLE device not supported by this library. PLATFORM should be Core or Photon ***"
 #endif
 
-enum {uSec, hmSec};			// microseconds or half-milliseconds
-enum action {INT_DISABLE, INT_ENABLE};
+//enum {uSec, hmSec};			// microseconds or half-milliseconds
+//enum action {INT_DISABLE, INT_ENABLE};
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,14 +48,14 @@ extern void Wiring_TIM5_Interrupt_Handler_override(void);
 extern void Wiring_TIM6_Interrupt_Handler_override(void);
 extern void Wiring_TIM7_Interrupt_Handler_override(void);
 
-enum TIMid {TIMER3, TIMER4, TIMER5, TIMER6, TIMER7, AUTO=255};
+//enum TIMid {TIMER3, TIMER4, TIMER5, TIMER6, TIMER7, AUTO=255};
 typedef uint32_t intPeriod;
 #endif
 
-class IntervalTimer {
-  private:
-	typedef void (*ISRcallback)();
-    enum {TIMER_OFF, TIMER_SIT};
+//class IntervalTimer {
+ // private:
+//	typedef void (*ISRcallback)();
+ //   enum {TIMER_OFF, TIMER_SIT};
 #if defined(STM32F2XX) && defined(PLATFORM_ID)	//Photon
     static const uint8_t NUM_SIT = 5;
 #endif
@@ -63,8 +63,8 @@ class IntervalTimer {
 	bool sysIntSetupDone = false;
 
 	// Timer ClockDivision = DIV4
-	const uint16_t SIT_PRESCALERu = (uint16_t)(SYSCORECLOCK / 1000000UL) - 1;	//To get TIM counter clock = 1MHz
-	const uint16_t SIT_PRESCALERm = (uint16_t)(SYSCORECLOCK / 2000UL) - 1;	//To get TIM counter clock = 2KHz
+	//const uint16_t SIT_PRESCALERu = (uint16_t)(SYSCORECLOCK / 1000000UL) - 1;	//To get TIM counter clock = 1MHz
+	//const uint16_t SIT_PRESCALERm = (uint16_t)(SYSCORECLOCK / 2000UL) - 1;	//To get TIM counter clock = 2KHz
     const uint16_t MAX_PERIOD = UINT16_MAX;		// 1-65535 us
 
     static bool SIT_used[NUM_SIT];
@@ -126,4 +126,4 @@ class IntervalTimer {
 }
 #endif
 
-#endif
+
